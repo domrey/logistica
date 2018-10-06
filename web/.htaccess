@@ -1,0 +1,20 @@
+#RewriteEngine on
+
+#If a directory or file exists, use i directly
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+#Otherwise forward it to index.php
+#RewriteRule . index.php
+
+Options +FollowSymLinks
+IndexIgnore */*
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    #RewriteBase /logistica.info/web
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.*$ index.php [L]
+</IfModule>
