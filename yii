@@ -8,8 +8,22 @@
  * @license http://www.yiiframework.com/license/
  */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
+// Define our application env variable as provided by ngnx/apache
+if (!defined('APPLICATION_ENV')) {
+    if (getenv('APPLICATION_ENV') != false)
+        define('APPLICATION_ENV', getenv('APPLICATION_ENV'));
+    else
+        define('APPLICATION_ENV', 'prod');
+}
+$env = require(__DIR__ . '/config/env.php');
+
+
+defined('YII_DEBUG') or define('YII_DEBUG', $env['debug']);
+defined('YII_ENV') or define('YII_ENV', APPLICATION_ENV);
+
+// fcgi doesn't have STDIN and STDOUT defined by default
+defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
+defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
