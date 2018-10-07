@@ -36,6 +36,14 @@ $config = [
     */
 ];
 
+if (APPLICATION_ENV == "dev") {
+    $config['bootstrap'][] = 'gii';
+    $config['modules'] =  [
+        'gii' => 'yii\gii\Module'
+    ];
+}
+
+/*
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'gii';
@@ -43,5 +51,5 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
     ];
 }
-
+ */
 return $config;

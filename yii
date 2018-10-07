@@ -19,7 +19,7 @@ $env = require(__DIR__ . '/config/env.php');
 
 
 defined('YII_DEBUG') or define('YII_DEBUG', $env['debug']);
-defined('YII_ENV') or define('YII_ENV', APPLICATION_ENV);
+//defined('YII_ENV') or define('YII_ENV', APPLICATION_ENV);
 
 // fcgi doesn't have STDIN and STDOUT defined by default
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
