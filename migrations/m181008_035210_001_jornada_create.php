@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m181008_035210_01_jornada_create
  */
-class m181008_035210_01_jornada_create extends Migration
+class m181008_035210_001_jornada_create extends Migration
 {
     /**
      * {@inheritdoc}
@@ -54,7 +54,9 @@ class m181008_035210_01_jornada_create extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('rh-jornada');
+       $tableName='rh_jornada';
+
+       $this->dropTable($tableName);
     }
 
     /*
