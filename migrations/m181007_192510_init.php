@@ -13,7 +13,7 @@ class m181007_192510_init extends Migration
      */
     public function safeUp()
     {
-
+        echo (\Yii::$app->db->dsn);
         return $this->createTable('user', [
             'id' => Schema::TYPE_PK,
             'email' => Schema::TYPE_STRING,
