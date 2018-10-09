@@ -20,12 +20,16 @@ class m181008_105014_002_descanso_create extends Migration
 
         if ($driver === 'mysql') {
             $tableOptions='CHARACTER SET utf COLLATE utf_spanish_ci ENGINE=InnoDB';
-            //$pkColumn = $this->char(2)->notNull();
+            $pkColumn = $this->char(2)->notNull();
+        }
+        else {
+            $pkColumn = ' CHAR(2) NOT NULL PRIMARY KEY';
         }
 
         $this->createTable($tableName, [
             //'clave'     => $this->char(2)->primaryKey(),
-            'clave'     => $this->char(2)->notNull(),
+            //'clave'     => $this->char(2)->notNull(),
+            'clave'     => $pkColumn,
             'descr'     => $this->string(45)->notNull(),
             'valor'     => $this->integer()->unsigned()->notNull(),
             'abrevn'    => $this->string(10)
