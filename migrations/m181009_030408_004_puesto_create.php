@@ -16,31 +16,37 @@ class m181009_030408_004_puesto_create extends Migration
         $tableOptions='';
         $driver=$this->db->driverName;
         $pkColumn='';
+        $boolColumn='';
 
         if ($driver === 'mysql') {
             $tableOptions='CHARACTER SET utf COLLATE utf8_spanish_ci ENGINE=InnoDB';
             $pkColumn = $this->integer()->unsigned()->notNull();
+            $boolColumn = ' TINYINT(1) NOT NULL';
+            $trueBoolColumn = $boolColumn . " DEFAULT 1";
         }
         else {
             $pkColumn = " INTEGER UNSIGNED NOT NULL PRIMARY KEY";
         }
 
         $this->createTable($tableName, [
-            'clave'         =>,
-            'descr'         =>,
-            'nombre'        =>,
-            'puesto_stps'   =>,
-            'clave_stps'    =>,
-            'activo'        =>,
-            'id_rev'        =>,
-            'id_reg_cont'   =>,
-            'nivel'         =>,
-            'familia'       =>,
-            'labores'       =>,
-            'regimen'       =>,
-            'clasif'        =>
+            'clave'         => $pkColumn,
+            'descr'         => $this->string(110)->notNull(),
+            'nombre'        => $this->string(80),
+            'puesto_stps'   => $this->string(110),
+            'clave_stps'    => $this->integer->unsigned(),
+            'activo'        => $trueBoolColumn,
+            'id_rev'        => $this->smallInt()->unsigned->null(),
+            'id_reg_cont'   => $this->smallInt()->unsigned->null(),
+            'nivel'         => $this->smallInt()->unsigned->notNull(),
+            'familia'       => $this->smallInt()->unsigned->notNull(),
+            'labores'       => $this->smallInt()->unsigned->notNull(),
+            'regimen'       => $this->char(1)->notNull(),
+            'clasif'        => $this->string(8)->notNull()
         ]);
 
+        if ($driver === 'mysql') {
+            $this->addPrimaryKey('pk-clave', $tableName, 'clave');
+        }
 
     }
 
@@ -49,9 +55,12 @@ class m181009_030408_004_puesto_create extends Migration
      */
     public function safeDown()
     {
-        $tableName='rh_puesto';
+        $tableBase = 'rh_puesto';
+        $tableName=$this->db->tablePrefix . $tableBase;
 
-        $this->dropTable($tableName);
+        //if ($this->db->schema->getTable($tableName, true))
+        if (Yii::app()->db->schema->getTable($tableName, true))
+            $this->dropTable($tableName);
     }
 
     /*
