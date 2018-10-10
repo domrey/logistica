@@ -26,6 +26,12 @@ $config = [
         ],
         'db' => $db,
     ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'templateFile' => '@app/views/migration.php',
+        ],
+    ],
     'params' => $params,
     /*
     'controllerMap' => [

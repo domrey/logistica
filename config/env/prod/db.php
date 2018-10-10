@@ -1,8 +1,14 @@
 <?php
-    return [
-        'dsn'=>'sqlite'.__DIR__.'/../../../runtime/db.sqlite',
-        'class'=>'yii\db\Connection',
-        'charset'=>'utf8'
-    ];
 
-?>
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=logistica',
+    'username' => 'dev',
+    'password' => 'developer01',
+    'charset' => 'utf8',
+
+    // Schema cache options (for production environment)
+    'enableSchemaCache' => true,
+    'schemaCacheDuration' => 60,
+    'schemaCache' => 'cache',
+];
