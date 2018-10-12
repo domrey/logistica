@@ -132,14 +132,34 @@ class RhAusencia extends \yii\db\ActiveRecord
 
     public function listaIdsCobertura()
     {
-      $data = RhAusenciaMotivo::find()->select(['id AS id', 'CONCAT(descr,"-",clave) AS item'])->orderBy('orden ASC')->asArray()->all();
+      $driver = Yii::$app->db->getDriverName();
+      $columnConcat='';
+
+      if ($driver === 'mysql' || $driver === 'mssql') {
+          $columnConcat = 'CONCAT(descr,"-",clave) AS item';
+      }
+      else {
+          $columnConcat = '(descr | "-" | clave) AS item';
+      }
+      //$data = RhAusenciaMotivo::find()->select(['id AS id', 'CONCAT(descr,"-",clave) AS item'])->orderBy('orden ASC')->asArray()->all();
+      $data = RhAusenciaMotivo::find()->select(['id AS id', $columnConcat])->orderBy('orden ASC')->asArray()->all();
       $options = ArrayHelper::map($data, 'id', 'item');
       return $options;
     }
 
     public function ListaMotivosCobertura()
     {
-      $data = RhAusenciaMotivo::find()->select(['clave AS clave', 'CONCAT(descr,"-",clave) AS item'])->orderBy('orden ASC')->asArray()->all();
+      //$data = RhAusenciaMotivo::find()->select(['clave AS clave', 'CONCAT(descr,"-",clave) AS item'])->orderBy('orden ASC')->asArray()->all();
+      $driver = Yii::$app->db->getDriverName();
+      $columnConcat='';
+
+      if ($driver === 'mysql' || $driver === 'mssql') {
+          $columnConcat = 'CONCAT(descr,"-",clave) AS item';
+      }
+      else {
+          $columnConcat = '(descr | "-" | clave) AS item';
+      }
+      $data = RhAusenciaMotivo::find()->select(['clave AS clave', $columnConcat])->orderBy('orden ASC')->asArray()->all();
       $options = ArrayHelper::map($data, 'clave', 'item');
       return $options;
     }

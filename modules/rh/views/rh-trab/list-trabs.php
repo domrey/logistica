@@ -4,12 +4,43 @@ use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RhTrabSearch */
 /* @var $provider yii\data\ActiveDataProvider */
 
 $this->title = 'Fichero';
 $this->params['breadcrumbs'][] = $this->title;
+$pdfHeader=[
+	'L' => [
+		'content' => 'LEFT CONTENT (HEAD)',
+	  ],
+	  'C' => [
+		'content' => 'CENTER CONTENT (HEAD)',
+		'font-size' => 10,
+		'font-style' => 'B',
+		'font-family' => 'arial',
+		'color' => '#333333'
+	  ],
+	  'R' => [
+		'content' => 'RIGHT CONTENT (HEAD)',
+	  ],
+	  'line' => true,
+];
+
+$pdfConfig=[
+	'filename' => 'listado-exportado',
+	'config' => [
+		'methods' => [
+			'SetHeader' => [
+				[
+					'odd'=> $pdfHeader,
+					'even'=> $pdfHeader,
+				],
+			],
+		],
+	],
+];
 ?>
 <div class="rh-trab-list">
 
@@ -27,7 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
     'export'=>[
         'fontAwesome'=>true,
         'showConfirmAlert'=>false,
-        'target'=>GridView::TARGET_BLANK
+		'target'=>GridView::TARGET_BLANK,
+		'exportConfig'=> [
+			GridView::PDF => $pdfConfig,
+		],
     ],
     'panel' => [
         // 'type' => 'primary',
