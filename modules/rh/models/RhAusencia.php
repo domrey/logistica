@@ -51,7 +51,7 @@ class RhAusencia extends \yii\db\ActiveRecord
 
     public function getTrabName()
     {
-      return $this->trab->getFullName();
+      return $this->trab->nlargo;
     }
 
     public function getMotivoCobertura()
@@ -76,7 +76,7 @@ class RhAusencia extends \yii\db\ActiveRecord
             //['fec_inicio', 'compare', 'compareAttribute'=>'fec_termino', 'operator'=>'<=', 'enableClientValidation'=>false],
             ['fec_inicio', 'compare', 'compareValue'=>date('Y-m-d'), 'operator'=>'>=', 'message'=>'Solo fechas recientes'],
             ['fec_termino', 'compare', 'compareAttribute'=>'fec_inicio', 'operator'=>'>=', 'message'=>'Debe ser igual o mayor al inicio'],
-            [['doc', 'obs'], 'string'],
+            [['doc', 'referencia'], 'string'],
             [['clave_plaza'], 'string', 'max' => 20],
             [['clave_motivo'], 'string', 'max' => 3],
             [['clave_trab'], 'exist', 'skipOnError' => true, 'targetClass' => RhTrab::className(), 'targetAttribute' => ['clave_trab' => 'clave']],
@@ -93,6 +93,7 @@ class RhAusencia extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'clave_trab' => 'Clave Trab',
+            'trabName'=>'Nombre del Trabajador',
             'id_plaza' => 'Id Plaza',
             'clave_plaza' => 'Clave Plaza',
             'id_motivo' => 'Id Motivo',
@@ -139,7 +140,7 @@ class RhAusencia extends \yii\db\ActiveRecord
           $columnConcat = 'CONCAT(descr,"-",clave) AS item';
       }
       else {
-          $columnConcat = '(descr | "-" | clave) AS item';
+          $columnConcat = '(descr || "-" || clave) AS item';
       }
       //$data = RhAusenciaMotivo::find()->select(['id AS id', 'CONCAT(descr,"-",clave) AS item'])->orderBy('orden ASC')->asArray()->all();
       $data = RhAusenciaMotivo::find()->select(['id AS id', $columnConcat])->orderBy('orden ASC')->asArray()->all();
@@ -157,10 +158,49 @@ class RhAusencia extends \yii\db\ActiveRecord
           $columnConcat = 'CONCAT(descr,"-",clave) AS item';
       }
       else {
-          $columnConcat = '(descr | "-" | clave) AS item';
+          $columnConcat = '(descr || "-" || clave) AS item';
       }
       $data = RhAusenciaMotivo::find()->select(['clave AS clave', $columnConcat])->orderBy('orden ASC')->asArray()->all();
       $options = ArrayHelper::map($data, 'clave', 'item');
+      return $options;
+    }
+
+
+	 /**
+    ** Método estático para regresar un objeto ausencia
+    ** para una plaza especificada
+    **/
+    public static function GetVigenteForPlaza($plaza)
+    {
+      return RhAusencia::find()
+      ->where(['id_plaza'=>$plaza->id])
+      ->andWhere(['>=', 'fec_termino', new Expression('NOW()')])
+      ->one();
+    }
+
+
+    public static function ListaVigentes()
+    {
+      // $data = RhAusencia::find()->joinWith('trab')
+      // ->select('id as id, rh_ausencia.clave_trab as ficha, rh_trab.ap_pat as trab')
+      // ->orderBy('fec_termino DESC')
+      // ->asArray()
+      // ->all();
+      // $options = ArrayHelper::map($data, 'id', 'ficha');
+      // return $options;
+      $sql = 'SELECT a.id AS id, ';
+      $sql .= 'CONCAT(\'F-\', a.clave_trab, \' \', b.nombre,\' \', b.ap_pat, \' \', \' \', c.descr, \' [\', a.clave_plaza, \']\') AS item ';
+      // $sql .= 'a.clave_plaza AS Plaza, c.descr AS Motivo, a.descr AS Descr ';
+      $sql .= 'FROM rh_ausencia a LEFT JOIN rh_trab b ON a.clave_trab=b.clave ';
+      $sql .= 'LEFT JOIN rh_ausencia_motivo c ON a.id_motivo=c.id ';
+      $sql .= 'WHERE a.fec_termino >= NOW() ';
+      $sql .= 'ORDER BY a.fec_inicio DESC';
+
+      // $data=['results'=>['IdTrab'=>'', 'NombreTrab'=>'', 'FecNac'=>'']];
+      // $data['results'] = Yii::$app->db->createCommand($sql)->queryAll();
+      $data = Yii::$app->db->createCommand($sql)->queryAll();
+      $options=ArrayHelper::map($data, 'id', 'item');
+      Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
       return $options;
     }
 

@@ -15,11 +15,15 @@ class RhTrabSearch extends RhTrab
     /**
      * {@inheritdoc}
      */
+
+     // atributo que representa el nombre completo del trabajador
+     public $trabajador;
+
     public function rules()
     {
         return [
             [['clave', 'activo'], 'integer'],
-            [['nombre', 'ap_pat', 'ap_mat', 'ncorto', 'apodo', 'curp', 'rfc', 'calle_no', 'colonia', 'ciudad', 'estado', 'pais', 'nacionalidad', 'edo_civil', 'sexo', 'tel', 'email', 'fec_cat', 'fec_depto', 'fec_planta', 'fec_ingreso', 'fec_nac', 'reg_cont', 'reg_sind'], 'safe'],
+            [['nombre', 'ap_pat', 'ap_mat', 'ncorto', 'trabajador', 'apodo', 'curp', 'rfc', 'calle_no', 'colonia', 'ciudad', 'estado', 'pais', 'nacionalidad', 'edo_civil', 'sexo', 'tel', 'email', 'fec_cat', 'fec_depto', 'fec_planta', 'fec_ingreso', 'fec_nac', 'reg_cont', 'reg_sind'], 'safe'],
         ];
     }
 
@@ -49,6 +53,10 @@ class RhTrabSearch extends RhTrab
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['trabajador']= [
+          'asc'=>['nombre'=>SORT_ASC, 'ap_pat'=>SORT_ASC, 'ap_mat'=>SORT_ASC],
+          'desc'=>['nombre'=>SORT_DESC, 'ap_pat'=>SORT_DESC, 'ap_mat'=>SORT_DESC],
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -72,6 +80,12 @@ class RhTrabSearch extends RhTrab
             ->andFilterWhere(['like', 'ap_pat', $this->ap_pat])
             ->andFilterWhere(['like', 'ap_mat', $this->ap_mat])
             ->andFilterWhere(['like', 'ncorto', $this->ncorto])
+            ->andFilterWhere(['or',
+                              ['like', 'nombre', $this->trabajador],
+                              ['like', 'ap_pat', $this->trabajador],
+                              ['like', 'apodo', $this->trabajador],
+                              ['like', 'ncorto', $this->trabajador],
+                            ])
             ->andFilterWhere(['like', 'apodo', $this->apodo])
             ->andFilterWhere(['like', 'curp', $this->curp])
             ->andFilterWhere(['like', 'rfc', $this->rfc])

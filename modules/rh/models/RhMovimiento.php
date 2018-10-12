@@ -40,11 +40,12 @@ class RhMovimiento extends \yii\db\ActiveRecord
     {
         return [
             [['clave_trab', 'clave_plaza', 'id_plaza', 'fec_inicio', 'fec_termino'], 'required'],
-            [['clave_trab', 'id_plaza', 'id_ausencia'], 'integer'],
+            [['clave_trab', 'id_plaza', 'id_ausencia', 'id_mov_padre', 'id_mov_origen'], 'integer'],
             [['fec_inicio', 'fec_termino'], 'safe'],
             [['clave_plaza'], 'string', 'max' => 30],
             [['descr'], 'string', 'max' => 200],
-            [['doc', 'ref_motivo', 'ref_origen'], 'string', 'max' => 100],
+            [['ref_motivo', 'ref_origen'], 'string', 'max' => 100],
+            [['doc_form', 'doc_num'], 'string', 'max'=>20],
             [['clave_trab'], 'exist', 'skipOnError' => true, 'targetClass' => RhTrab::className(), 'targetAttribute' => ['clave_trab' => 'clave']],
             [['id_plaza'], 'exist', 'skipOnError' => true, 'targetClass' => RhPlaza::className(), 'targetAttribute' => ['id_plaza' => 'id']],
         ];
@@ -61,12 +62,19 @@ class RhMovimiento extends \yii\db\ActiveRecord
             'clave_plaza' => 'PLAZA',
             'id_plaza' => 'ID PLAZA',
             'id_ausencia' => 'ID AUSENCIA',
+            'id_mov_padre'=> 'MOV. SUPERIOR',
+            'id_mov_origen' => 'MOV. ORIGEN',
             'fec_inicio' => 'FECHA INICIO',
             'fec_termino' => 'FECHA TERMINO',
             'descr' => 'DESCRIPCOIN',
-            'doc' => 'DOCUMENTO',
+            'doc_num' => 'DOCUMENTO',
+            'doc_form' => 'FORMATO',
             'ref_motivo' => 'REF. MOTIVO',
             'ref_origen' => 'REF. ORIGEN',
+            'tipo' => 'TIPO MOVIMIENTO',
+            'term_ant' => 'TERMINACION ANT.',
+            'term_descr' => 'DESCR. DE TERMINACION',
+            'term_motivo' => 'MOTIVO DE TERMINACION',
         ];
     }
 
@@ -111,8 +119,20 @@ class RhMovimiento extends \yii\db\ActiveRecord
     */
     public static function UltimoMovimientoTrab($trab)
     {
+      $nowExpression = '';
+      $driver = Yii::$app->db->driverName;
+
+      if ($driver === 'mysql') {
+          $nowExpression = 'NOW()';
+      }
+      elseif ($driver === 'sqlite') {
+          $nowExpression = "date('now')";
+      }
+      
+
       $movimiento = RhMovimiento::find()->where(['clave_trab'=>$trab->clave])
-      ->andWhere(['>=', 'fec_termino', new Expression('NOW()')])->orderBy('fec_inicio DESC')->one();
+    //   ->andWhere(['>=', 'fec_termino', new Expression('NOW()')])->orderBy('fec_inicio DESC')->one();
+      ->andWhere(['>=', 'fec_termino', new Expression($nowExpression)])->orderBy('fec_inicio DESC')->one();
       return $movimiento;
     }
 

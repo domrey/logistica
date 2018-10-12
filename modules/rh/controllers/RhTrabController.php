@@ -264,12 +264,29 @@ class RhTrabController extends Controller
 
     public function actionGetNextBirthdays()
     {
+      $driver = Yii::$app->db->driverName;
       $daysInterval=7;
-      $sql = 'SELECT clave AS IdTrab, concat(nombre,\' \', ap_pat) AS NombreTrab, fec_nac AS FecNac ';
-      $sql .= 'FROM rh_trab WHERE CONCAT(IF(CONCAT( YEAR(CURDATE()), ';
-      $sql .= 'substring(`fec_nac`, 5, length(`fec_nac`))) < CURDATE(), ';
-      $sql .= 'YEAR(CURDATE()) + 1, YEAR(CURDATE()) ), substring(`fec_nac`, 5, length(`fec_nac`))) ';
-      $sql .= 'BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL :dint DAY)';
+
+      $sqliteQuery = "SELECT clave AS IdTrab, (nombre || ' '  || ap_pat) AS NombreTrab, ";
+      $sqliteQuery .= "fec_nac AS FecNac ";
+      $sqliteQuery .= ", (strftime('%Y', 'now') || strftime('-%m-%d', fec_nac)) as NextBirthday ";
+      $sqliteQuery .= "FROM rh_trab ";
+      $sqliteQuery .= "WHERE NextBirthday > date('now') ";
+      $sqliteQuery .= "ORDER BY NextBirthDay ASC limit :dint";
+ 
+      $mysqlQuery = 'SELECT clave AS IdTrab, concat(nombre,\' \', ap_pat) AS NombreTrab, fec_nac AS FecNac ';
+      $mysqlQuery .= 'FROM rh_trab WHERE CONCAT(IF(CONCAT( YEAR(CURDATE()), ';
+      $mysqlQuery .= 'substring(`fec_nac`, 5, length(`fec_nac`))) < CURDATE(), ';
+      $mysqlQuery .= 'YEAR(CURDATE()) + 1, YEAR(CURDATE()) ), substring(`fec_nac`, 5, length(`fec_nac`))) ';
+      $mysqlQuery .= 'BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL :dint DAY)';
+
+      $genericQuery = "";
+
+      if ($driver === 'mysql')
+        $sql = $mysqlQuery;
+        elseif ($driver === 'sqlite')
+            $sql = $sqliteQuery;
+            else $sql = $genericQuery;
 
       $data=['results'=>['IdTrab'=>'', 'NombreTrab'=>'', 'FecNac'=>'']];
       $data['results'] = Yii::$app->db->createCommand($sql)->bindValue(':dint', $daysInterval)->queryAll();

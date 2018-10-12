@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'doc')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'doc_form')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'ref_motivo')->textarea(['rows' => 6]) ?>
 
