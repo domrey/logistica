@@ -71,6 +71,9 @@ $config = [
       'rh' => [
           'class' => 'app\modules\rh\Module',
        ],
+       'parque' => [
+          'class' => 'app\modules\parque\Module',
+       ],
        'gridview' => [
           'class' => '\kartik\grid\Module'
        ],
