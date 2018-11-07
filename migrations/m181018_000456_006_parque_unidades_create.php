@@ -30,8 +30,9 @@ class m181018_000456_006_parque_unidades_create extends Migration
 
         if (!$this->db->getTableSchema($tableName, true)) {
             $this->createTable($tableName, [
+                'id'            => $this->primaryKey(),
                 'inmovilizado'  => $this->string(12),
-                'alias'         => $pkColumn,
+                'alias'         => $this->string(15),
                 'id_tipo'       => $this->integer()->unsigned() . $rel1,
                 'id_subtipo'    => $this->integer()->unsigned() . $rel2,
                 'id_marca'      => $this->integer()->unsigned() . $rel3,
@@ -46,8 +47,9 @@ class m181018_000456_006_parque_unidades_create extends Migration
             ]);
 
             if ($driver === 'mysql') {
-                $this->addPrimaryKey('PK_uni_alias', $tableName, 'alias');
+                //$this->addPrimaryKey('PK_id_unidad', $tableName, 'id');
                 $this->createIndex('IDX_inmovilizado_unidad', $tableName, 'inmovilizado');
+                $this->createIndex('IDX_alias_unidad', $tableName, 'alias');
 
                 $this->addForeignKey('FK_id_tipo', $tableName, 'id_tipo', 'uni_tipo', '[id]', 'CASCADE', 'NO ACTION');
                 $this->addForeignKey('FK_id_subtipo', $tableName, 'id_subtipo', 'uni_subtipo', '[id]', 'CASCADE', 'NO ACTION');
