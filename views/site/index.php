@@ -32,7 +32,7 @@ $this->title = 'SYSLOG';
 
                 <p>Gestión de los vehículos pertenecientes al departamento.</p>
 
-                <p><?= Html::a('Vehículos', ['vehiculos/index'], ['class' => 'btn btn-primary']); ?></p>
+                <p><?= Html::a('Vehículos', ['parque/default'], ['class' => 'btn btn-primary']); ?></p>
             </div>
             <div class="col-lg-4">
                 <h3>Servicios Logísticos</h3>
