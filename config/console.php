@@ -29,7 +29,11 @@ $config = [
     'controllerMap' => [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
-            'templateFile' => '@app/views/migration.php',
+//            'templateFile' => '@app/views/migration.php',
+            'templateFile' => '@app/commands/templates/migration.php',
+            'migrationNamespaces'=> [
+              'app/commands/templates/',
+            ],
         ],
     ],
     'params' => $params,
