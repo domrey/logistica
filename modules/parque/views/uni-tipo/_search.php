@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'clave') ?>
+    <?= $form->field($model, 'abrev') ?>
 
     <?= $form->field($model, 'nombre') ?>
 

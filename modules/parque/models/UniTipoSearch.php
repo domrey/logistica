@@ -19,7 +19,7 @@ class UniTipoSearch extends UniTipo
     {
         return [
             [['id'], 'integer'],
-            [['clave', 'nombre'], 'safe'],
+            [['abrev', 'nombre'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class UniTipoSearch extends UniTipo
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'clave', $this->clave])
+        $query->andFilterWhere(['like', 'abrev', $this->abrev])
             ->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;

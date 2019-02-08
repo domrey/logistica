@@ -29,8 +29,8 @@ class UniTipo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['clave', 'nombre'], 'required'],
-            [['clave'], 'string', 'max' => 10],
+            [['nombre'], 'required'],
+            [['abrev'], 'string', 'max' => 15],
             [['nombre'], 'string', 'max' => 20],
         ];
     }
@@ -42,7 +42,7 @@ class UniTipo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'clave' => 'Clave',
+            'abrev' => 'Abreviatura',
             'nombre' => 'Nombre',
         ];
     }

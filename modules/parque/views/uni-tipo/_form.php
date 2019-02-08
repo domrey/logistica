@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'clave')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'abrev')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
