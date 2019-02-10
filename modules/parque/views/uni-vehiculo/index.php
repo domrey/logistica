@@ -1,14 +1,65 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+#use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\parque\models\UniVehiculoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Uni Vehiculos';
+$this->title = 'Unidades';
+$this->params['breadcrumbs'][]=['label'=>'Parque Vehicular', 'url'=>'/parque/default'];
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns=[
+  ['class'=>'kartik\grid\SerialColumn'],
+  [
+    'attribute'=>'inmovilizado',
+    'format'=>'raw',
+    'label'=>'INMOVILIZADO',
+    'width'=>'100px',
+    'hAlign'=>GridView::ALIGN_CENTER,
+  ],
+  [
+    'attribute'=>'alias',
+    'format'=>'raw',
+    'label'=>'ECONOMICO',
+    'width'=>'80px',
+    'hAlign'=>GridView::ALIGN_CENTER,
+  ],
+  [
+    'attribute'=>'descr',
+    'label'=>'DESCRIPCION',
+    'headerOptions'=>['style'=>'text-align:center'],
+  ],
+  [
+    'attribute'=>'modelo',
+    'label'=>'MODELO',
+    'hAlign'=>GridView::ALIGN_CENTER,
+  ],
+  [
+    'attribute'=>'serie',
+    'label'=>'NUM. SERIE',
+    'headerOptions'=>['style'=>'text-align:center'],
+  ],
+  [
+    'attribute'=>'activo',
+    'format'=>'raw',
+    'label'=>'ACTIVO',
+    'hAlign'=>GridView::ALIGN_CENTER,
+    'value'=>function($model)
+    {
+      if ($model->activo==1) {
+        return '<span class="label label-success">ACTIVO</span>';
+      }
+      else {
+        return '<span class="label label-default">INACTIVO</span>';
+      }
+    }
+  ],
+  ['class' => 'yii\grid\ActionColumn'],
+];
 ?>
 <div class="uni-vehiculo-index">
 
@@ -23,14 +74,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'inmovilizado',
-            'alias',
-            'id_marca',
-            'id_tipo',
+        'columns' => $columns,
+        #[
+        #    ['class' => 'yii\grid\SerialColumn'],
+#
+#            'id',
+#            'inmovilizado',
+#            'alias',
+#            'id_marca',
+#            'id_tipo',
             //'id_clase',
             //'id_denom',
             //'id_aditamento',
@@ -44,8 +96,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'propietario',
             //'comentarios',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+#            ['class' => 'yii\grid\ActionColumn'],
+#        ],
     ]); ?>
     <?php Pjax::end(); ?>
 </div>

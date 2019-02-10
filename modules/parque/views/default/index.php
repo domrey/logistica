@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = 'Parque Vehícular';
         <div class="panel-body">
             <p>&nbsp;<small>Tablas del sistema <hr /> Sólo administradores</small></p>
             <div class="list-group">
-              <a href="uni-parque" class="list-group-item">Unidades</a>
+              <a href="uni-vehiculo" class="list-group-item">Unidades</a>
               <a href="comb-tarjetas" class="list-group-item">Tarjetas de combustible</a>
               <a href="comb-registro" class="list-group-item">Registro de combustible</a>
               <a href="uni-clase" class="list-group-item">Clase de unidades</a>
