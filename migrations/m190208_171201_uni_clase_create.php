@@ -75,8 +75,9 @@ class m190208_171201_uni_clase_create extends MyDbMigration
     public function insertRows()
     {
         $this->insert('uni_clase', ['nombre'=>'LIGERO']);
-        $this->insert('uni_clase', ['nombre'=>'PESADO']);
         $this->insert('uni_clase', ['nombre'=>'SEMI-PESADO']);
+        $this->insert('uni_clase', ['nombre'=>'PESADO']);
         $this->insert('uni_clase', ['nombre'=>'REMOLQUE']);
+        $this->insert('uni_clase', ['nombre'=>'CARGAS']);
     }
 }

@@ -96,6 +96,7 @@ class m190208_174702_uni_marca_create extends MyDbMigration
          $this->insert($this->tableName, ['nombre'=>'MHASA']);
          $this->insert($this->tableName, ['nombre'=>'DAKOTA']);
          $this->insert($this->tableName, ['nombre'=>'PROPIA']);
+         $this->insert($this->tableName, ['nombre'=>'HYSTER']);
          $this->insert($this->tableName, ['nombre'=>'OTRA']);
          $this->insert($this->tableName, ['nombre'=>'DESCONOCIDA']);
     }

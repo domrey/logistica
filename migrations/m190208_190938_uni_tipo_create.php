@@ -87,7 +87,7 @@ class m190208_190938_uni_tipo_create extends MyDbMigration
         $this->insert($this->tableName, ['nombre'=>'LOWBOY', 'ABREV'=>'LB']);
         $this->insert($this->tableName, ['nombre'=>'REMOLQUE', 'ABREV'=>'REM']);
         $this->insert($this->tableName, ['nombre'=>'PLATAFORMA/CABINA', 'ABREV'=>'PLAT/CAB']);
-        $this->insert($this->tableName, ['nombre'=>'PLATAFORMA', 'ABREV'=>'PLAT']);
+        $this->insert($this->tableName, ['nombre'=>'PLANA', 'ABREV'=>'PLAT']);
         $this->insert($this->tableName, ['nombre'=>'UPV', 'ABREV'=>'UPV']);
         $this->insert($this->tableName, ['nombre'=>'GRUA', 'ABREV'=>'GRUA']);
         $this->insert($this->tableName, ['nombre'=>'MONTACARGA', 'ABREV'=>'MCARGA']);

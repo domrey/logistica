@@ -78,6 +78,10 @@ class m190208_211909_uni_aditamento_create extends MyDbMigration
         $this->insert($this->tableName, ['nombre'=>'CASETA']);
         $this->insert($this->tableName, ['nombre'=>'REDILA']);
         $this->insert($this->tableName, ['nombre'=>'AUTOTANQUE']);
+        $this->insert($this->tableName, ['nombre'=>'COMPRESOR']);
+        $this->insert($this->tableName, ['nombre'=>'WINCHE']);
+        $this->insert($this->tableName, ['nombre'=>'ROL']);
+        $this->insert($this->tableName, ['nombre'=>'OTRO']);
         $this->insert($this->tableName, ['nombre'=>'NINGUNO']);
     }
 }
