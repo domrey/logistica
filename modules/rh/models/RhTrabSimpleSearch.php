@@ -22,7 +22,7 @@ class RhTrabSimpleSearch extends RhTrab
     {
         return [
             [['clave', 'activo'], 'integer'],
-            [['nombre', 'ap_pat', 'ap_mat', 'ncorto', 'apodo', 'nlargo', 'curp', 'rfc', 'reg_cont', 'reg_sind'], 'safe'],
+            [['nlargo'], 'safe'],
         ];
     }
 

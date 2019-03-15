@@ -17,13 +17,13 @@ class RhTrabSearch extends RhTrab
      */
 
      // atributo que representa el nombre completo del trabajador
-     public $nlargo;
+     public $trabajador;
 
     public function rules()
     {
         return [
-            [['clave'], 'integer'],
-            [['nombre', 'ap_pat', 'ap_mat', 'ncorto', 'nlargo', 'apodo', 'curp', 'rfc', 'calle_no', 'colonia', 'ciudad', 'estado', 'pais', 'nacionalidad', 'edo_civil', 'sexo', 'tel', 'email', 'fec_cat', 'fec_depto', 'fec_planta', 'fec_ingreso', 'fec_nac', 'reg_cont', 'reg_sind'], 'safe'],
+            [['clave', 'activo'], 'integer'],
+            [['nombre', 'ap_pat', 'ap_mat', 'ncorto', 'trabajador', 'apodo', 'curp', 'rfc', 'calle_no', 'colonia', 'ciudad', 'estado', 'pais', 'nacionalidad', 'edo_civil', 'sexo', 'tel', 'email', 'fec_cat', 'fec_depto', 'fec_planta', 'fec_ingreso', 'fec_nac', 'reg_cont', 'reg_sind'], 'safe'],
         ];
     }
 
@@ -53,7 +53,7 @@ class RhTrabSearch extends RhTrab
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['nlargo']= [
+        $dataProvider->sort->attributes['trabajador']= [
           'asc'=>['nombre'=>SORT_ASC, 'ap_pat'=>SORT_ASC, 'ap_mat'=>SORT_ASC],
           'desc'=>['nombre'=>SORT_DESC, 'ap_pat'=>SORT_DESC, 'ap_mat'=>SORT_DESC],
         ];
@@ -68,6 +68,12 @@ class RhTrabSearch extends RhTrab
         // grid filtering conditions
         $query->andFilterWhere([
             'clave' => $this->clave,
+            'activo' => $this->activo,
+            'fec_cat' => $this->fec_cat,
+            'fec_depto' => $this->fec_depto,
+            'fec_planta' => $this->fec_planta,
+            'fec_ingreso' => $this->fec_ingreso,
+            'fec_nac' => $this->fec_nac,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
@@ -75,13 +81,26 @@ class RhTrabSearch extends RhTrab
             ->andFilterWhere(['like', 'ap_mat', $this->ap_mat])
             ->andFilterWhere(['like', 'ncorto', $this->ncorto])
             ->andFilterWhere(['or',
-                              ['like', 'nombre', $this->nlargo],
-                              ['like', 'ap_pat', $this->nlargo],
-                              ['like', 'ap_mat', $this->nlargo],
-                              ['like', 'apodo', $this->nlargo],
-                              ['like', 'ncorto', $this->nlargo],
+                              ['like', 'nombre', $this->trabajador],
+                              ['like', 'ap_pat', $this->trabajador],
+                              ['like', 'apodo', $this->trabajador],
+                              ['like', 'ncorto', $this->trabajador],
                             ])
-            ->andFilterWhere(['like', 'apodo', $this->apodo]);
+            ->andFilterWhere(['like', 'apodo', $this->apodo])
+            ->andFilterWhere(['like', 'curp', $this->curp])
+            ->andFilterWhere(['like', 'rfc', $this->rfc])
+            ->andFilterWhere(['like', 'calle_no', $this->calle_no])
+            ->andFilterWhere(['like', 'colonia', $this->colonia])
+            ->andFilterWhere(['like', 'ciudad', $this->ciudad])
+            ->andFilterWhere(['like', 'estado', $this->estado])
+            ->andFilterWhere(['like', 'pais', $this->pais])
+            ->andFilterWhere(['like', 'nacionalidad', $this->nacionalidad])
+            ->andFilterWhere(['like', 'edo_civil', $this->edo_civil])
+            ->andFilterWhere(['like', 'sexo', $this->sexo])
+            ->andFilterWhere(['like', 'tel', $this->tel])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'reg_cont', $this->reg_cont])
+            ->andFilterWhere(['like', 'reg_sind', $this->reg_sind]);
 
         return $dataProvider;
     }

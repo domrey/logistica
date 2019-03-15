@@ -6,20 +6,21 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\rh\models\RhTrab */
 
-$this->title = $model->clave;
-$this->params['breadcrumbs'][] = ['label' => 'Rh Trabs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $model->ncorto;
+$this->params['breadcrumbs'][]=['label'=>'Recursos Humanos', 'url'=>'/rh/default'];
+$this->params['breadcrumbs'][] = ['label' => 'Trabajadores', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ucwords(strtolower($this->title));
 ?>
 <div class="rh-trab-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Trabajador: <?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->clave], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->clave], [
+        <?= Html::a('Modificar', ['update', 'id' => $model->clave], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->clave], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Está seguro que desea eliminar el registro?',
                 'method' => 'post',
             ],
         ]) ?>

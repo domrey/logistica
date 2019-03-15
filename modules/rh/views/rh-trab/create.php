@@ -6,8 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\rh\models\RhTrab */
 
-$this->title = 'Create Rh Trab';
-$this->params['breadcrumbs'][] = ['label' => 'Rh Trabs', 'url' => ['index']];
+$this->title = 'Registrar Trabajador';
+$this->params['breadcrumbs'][]=['label'=>'Recursos Humanos', 'url'=>'/rh/default'];
+$this->params['breadcrumbs'][] = ['label' => 'Trabajadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rh-trab-create">

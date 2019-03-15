@@ -7,7 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\rh\models\RhPlazaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Rh Plazas';
+$this->title = 'Plazas';
+$this->params['breadcrumbs'][]=['label'=>'Recursos Humanos', 'url'=>'/rh/default'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rh-plaza-index">

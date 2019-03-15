@@ -5,10 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\rh\models\RhTrab */
 
-$this->title = 'Update Rh Trab: ' . $model->clave;
-$this->params['breadcrumbs'][] = ['label' => 'Rh Trabs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->clave, 'url' => ['view', 'id' => $model->clave]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Modificando: ' . $model->ncorto;
+$this->params['breadcrumbs'][]=['label'=>'Recursos Humanos', 'url'=>'/rh/default'];
+$this->params['breadcrumbs'][] = ['label' => 'Trabajadores', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => ucwords(strtolower($model->ncorto)), 'url' => ['view', 'id' => $model->clave]];
+$this->params['breadcrumbs'][] = 'Modificar';
 ?>
 <div class="rh-trab-update">
 

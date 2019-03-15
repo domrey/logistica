@@ -16,7 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $panelHeading='<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Listado de Trabajadores</h3>';
 
 $columns=[
-  ['class' => 'kartik\grid\SerialColumn'],
+  [
+    'class' => 'kartik\grid\SerialColumn',
+    'contentOptions' => ['class' => 'kartik-sheet-style'],
+  ],
   [
     'attribute'=>'clave',
     // 'mergeHeader'=>true,
