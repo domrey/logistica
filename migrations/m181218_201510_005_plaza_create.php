@@ -51,7 +51,7 @@ class m181218_201510_005_plaza_create extends MyDbMigration
         $this->createTable($this->tableName, [
             'id'            => 'INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT',
             'clave'         => 'VARCHAR(31) NOT NULL',
-            'descr'         => 'VARCHAR(35)',
+            'descr'         => 'VARCHAR(65)',
             'tipo'          => "VARCHAR(10) NOT NULL DEFAULT 'TEMPORAL'",
             'clave_puesto'  => 'INTEGER UNSGINED NOT NULL REFERENCES rh_puesto(clave)',
             'activa'        => 'TINYINT UNSIGNED NOT NULL DEFAULT 1',
@@ -79,7 +79,7 @@ class m181218_201510_005_plaza_create extends MyDbMigration
         $this->createTable($this->tableName, [
             'id'            => $this->primaryKey(),
             'clave'         => $this->string(30)->notNull(),
-            'descr'         => $this->string(35),
+            'descr'         => $this->string(65),
             'tipo'          => "ENUM('DEFINITIVA', 'TEMPORAL') DEFAULT 'TEMPORAL'",
             'clave_puesto'  => $this->integer()->unsigned()->notNull(),
             'activa'        => $this->tinyInteger()->notNull()->defaultValue(1),
