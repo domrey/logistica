@@ -58,7 +58,12 @@ class m190208_171201_uni_clase_create extends MyDbMigration
 
     public function _safeUp_mysql()
     {
-
+        $this->createTable($this->tableName, [
+            'id'    => $this->primaryKey(),
+            'nombre'=> $this->string(20)->notNull(),
+        ]);
+        $this->createIndex('IDX_parque_ckase', $this->tableName, 'nombre');
+        $this->insertRows();
     }
 
     public function _safeDown_sqlite()
@@ -69,7 +74,8 @@ class m190208_171201_uni_clase_create extends MyDbMigration
 
     public function _safeDown_mysql()
     {
-
+        $this->dropIndex('IDX_parque_clase', $this->tableName);
+        $this->dropTable($this->tableName);
     }
 
     public function insertRows()
