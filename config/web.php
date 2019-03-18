@@ -68,6 +68,9 @@ $config = [
 
     ],
     'modules' => [
+      'webshell' => [
+        'class'=>'samdark\webshell\Module',
+      ],
       'rh' => [
           'class' => 'app\modules\rh\Module',
        ],
