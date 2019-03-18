@@ -70,6 +70,11 @@ $config = [
     'modules' => [
       'webshell' => [
         'class'=>'samdark\webshell\Module',
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.2'],
+            'checkAccessCallback' => function (\yii\base\Action $action) {
+                // return true if access is granted or false otherwise
+                return true;
+        }
       ],
       'rh' => [
           'class' => 'app\modules\rh\Module',
