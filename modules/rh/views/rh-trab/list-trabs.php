@@ -35,6 +35,10 @@ $columns=[
     'attribute'=>'nlargo',
     'width'=>'400px',
     'label'=>'TRABAJADOR',
+    'format'=>'raw',
+		'value' => function($model) {
+				return Html::a($model->nlargo, ['rh-trab/view-trab', 'id'=>$model->clave]);
+		},
     'headerOptions'=>['style'=>'text-align:center'],
   ],
 	[

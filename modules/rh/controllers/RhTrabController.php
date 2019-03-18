@@ -61,6 +61,14 @@ class RhTrabController extends Controller
         ]);
     }
 
+    public function actionViewTrab($id)
+    {
+
+      return $this->render('view-trab', [
+        'model'=>$this->findModel($id),
+      ]);
+    }
+
     /**
      * Creates a new RhTrab model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -128,6 +136,7 @@ class RhTrabController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 
     /**
     * Obtiene la situacion actual del trabajador dada su clave
@@ -273,7 +282,7 @@ class RhTrabController extends Controller
       $sqliteQuery .= "FROM rh_trab ";
       $sqliteQuery .= "WHERE NextBirthday > date('now') ";
       $sqliteQuery .= "ORDER BY NextBirthDay ASC limit :dint";
- 
+
       $mysqlQuery = 'SELECT clave AS IdTrab, concat(nombre,\' \', ap_pat) AS NombreTrab, fec_nac AS FecNac ';
       $mysqlQuery .= 'FROM rh_trab WHERE CONCAT(IF(CONCAT( YEAR(CURDATE()), ';
       $mysqlQuery .= 'substring(`fec_nac`, 5, length(`fec_nac`))) < CURDATE(), ';

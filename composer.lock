@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ea0d779c494ff8d6fe5ac8f87a98ae6",
+    "content-hash": "1452669e125e6f4503cb7399c3bca677",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -74,7 +74,7 @@
             "version": "1.12.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/components/jqueryui.git",
+                "url": "git@github.com:components/jqueryui.git",
                 "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
             },
             "dist": {
@@ -487,17 +487,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-detail-view.git",
-                "reference": "91905b0e1098ba12f821ddd02d3500975619f5de"
+                "reference": "13dab1c4470445de10e5dfd3268028b6b303e171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/91905b0e1098ba12f821ddd02d3500975619f5de",
-                "reference": "91905b0e1098ba12f821ddd02d3500975619f5de",
+                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/13dab1c4470445de10e5dfd3268028b6b303e171",
+                "reference": "13dab1c4470445de10e5dfd3268028b6b303e171",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-dialog": "~1.0",
-                "kartik-v/yii2-widget-activeform": ">=1.5.6"
+                "kartik-v/yii2-widget-activeform": ">=1.5.7"
             },
             "type": "yii2-extension",
             "extra": {
@@ -532,7 +532,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-27T18:45:36+00:00"
+            "time": "2018-11-21T17:30:58+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
