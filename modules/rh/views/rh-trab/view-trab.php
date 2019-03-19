@@ -1,8 +1,9 @@
 <?php
 
-use yii\helpers\Html;
+//use yii\helpers\Html;
 //use yii\widgets\DetailView;
 use kartik\detail\DetailView;
+use kartik\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\rh\models\RhTrab */
@@ -14,10 +15,10 @@ $this->params['breadcrumbs'][] = ucwords(strtolower($this->title));
 
 $attributes = [
   [
-    //'attribute'=>'activo',
+    'group'=>true,
     'format'=>'raw',
-    'label'=>'',
-    'value'=> ($model->activo===1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span>',
+    'label'=>'STATUS: ' . ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span>',
+    'value'=> ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span>',
   ],
   [
     'group'=>true,
@@ -66,6 +67,9 @@ $attributes = [
           'pluginOptions'=>['format'=>'yyyy-mm-dd'],
         ],
         'label'=>'FEC. NAC.',
+        //'value'=>function() {
+        //  isset($model->fec_nac) ? $model->fec_nac : '';
+        //}
       ],
       [
         'attribute'=>'curp',
@@ -182,22 +186,13 @@ $attributes = [
         'enableEditMode'=>false,
         'hAlign'=>DetailView::ALIGN_LEFT,
         'panel'=>[
-          'heading'=>'FICHA: ' . '<strong>' . $model->clave . '</strong>',
+//          'heading'=>'FICHA: ' . '<strong>' . $model->clave . '</strong>',
+          'heading'=>'<strong>' . $model->nlargo . '</strong>',
+          // . ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span></span>',
           //'type'=>DetailView::TYPE_INFO,
           'type'=>$model->activo?DetailView::TYPE_INFO:DetailView::TYPE_DANGER,
         ],
         'attributes' => $attributes,
-        /*[
-            'activo',
-            'fec_cat',
-            'fec_depto',
-            'fec_planta',
-            'fec_ingreso',
-            'fec_nac',
-            'reg_cont',
-            'reg_sind',
-        ],
-        */
     ]) ?>
 
 </div>

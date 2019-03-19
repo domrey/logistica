@@ -83,7 +83,8 @@ class m181218_161059_004_puesto_create extends MyDbMigration
             'id_rev'        => $this->smallInteger()->unsigned()->notNull()->comment('ID DE LA REVISION CONTRACTUAL'),
             'id_reg_cont'   => $this->smallInteger()->unsigned()->notNull()->comment('ID DEL REGIMEN CONTRACTUAL DEL PUESTO'),
         ]);
-        $this->addPrimaryKey('PK_CLAVE', $this->tableName, 'clave');
+        $this->addPrimaryKey('PK_clave', $this->tableName, 'clave');
+	$this->createIndex('IDX_descr_puesto', $this->tableName, 'descr ASC');
         $this->insertRows();
     }
 
@@ -94,7 +95,8 @@ class m181218_161059_004_puesto_create extends MyDbMigration
 
     public function _safeDown_mysql()
     {
-        #$this->dropPrimaryKey('PK-CLAVE', $this->tableName);
+        $this->dropPrimaryKey('PK_clave', $this->tableName);
+	$this->dropIndex('IDX_descr', $this->tableName);
         $this->dropTable($this->tableName);
     }
 
