@@ -13,163 +13,198 @@ $this->params['breadcrumbs'][]=['label'=>'Recursos Humanos', 'url'=>'/rh/default
 $this->params['breadcrumbs'][] = ['label' => 'Fichero', 'url' => ['/rh/rh-trab/list']];
 $this->params['breadcrumbs'][] = ucwords(strtolower($this->title));
 
+$badge_status = '<span class="badge badge-' . (($model->activo) ? 'sucess">' : 'danger">') . $model->status . '</span>';
+$heading = $badge_status . '  <i class="glyphicon glyphicon-user"></i> <strong>' . $model->nlargo . '</strong>';
+
 $attributes = [
   [
-    'group'=>true,
-    'format'=>'raw',
-    'label'=>'STATUS: ' . ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span>',
-    'value'=> ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span>',
-  ],
-  [
-    'group'=>true,
-    'label'=>'DATOS PERSONALES',
-    'rawOptions'=>['class'=>'table-info'],
-  ],
-  [
-    'columns'=> [
+    'columns' => [
       [
-        'attribute'=>'nombre',
-        'label'=>'NOMBRE',
-        'displayOnly'=>true,
-        'valueColOptions'=>['style'=>'width:20%'],
+        'attribute' => 'clave',
+        'label' => 'FICHA:',
       ],
       [
-        'attribute'=>'ap_pat',
-        'label'=>'PATERNO',
-        'valueColOptions'=>['style'=>'width:20%'],
-      ],
-      [
-        'attribute'=>'ap_mat',
-        'label'=>'MATERNO',
-        'valueColOptions'=>['style'=>'width:20%'],
+        'attribute' => 'status',
+        'format' => 'raw',
+        'label' => 'STATUS:',
       ],
     ],
   ],
   [
-    'columns'=>[
+    'group' => true,
+    'format' => 'raw',
+    'label' => 'DATOS PERSONALES',
+    'rowOptions' => ['class' => 'table-info'],
+  ],
+  [
+    'columns' => [
       [
-        'attribute'=>'ncorto',
-        'label'=>'NOM. CORTO',
+        'attribute' => 'nombre',
+        'label' => 'NOMBRE:',
+        'labelColOptions' => ['style' => 'width: 10%'],
+        'valueColOptions' => ['style' => 'width: 20%'],
       ],
       [
-        'attribute'=>'apodo',
-        'label'=>'SOBRENOMBRE',
+        'attribute' => 'ap_pat',
+        'label' => 'AP. PATERNO:',
+        'labelColOptions' => ['style' => 'width: 10%'],
+        'valueColOptions' => ['style' => 'width: 25%'],
+      ],
+      [
+        'attribute' => 'ap_mat',
+        'label' => 'AP. MATERNO',
+        'labelColOptions' => ['style' => 'width: 10%'],
+        'valueColOptions' => ['style' => 'width: 25%'],
       ],
     ]
   ],
   [
-    'columns'=>[
-      [
-        'attribute'=>'fec_nac',
-        'format'=>'date',
-        'type'=>DetailView::INPUT_DATE,
-        'widgetOptions'=> [
-          'pluginOptions'=>['format'=>'yyyy-mm-dd'],
-        ],
-        'label'=>'FEC. NAC.',
-        //'value'=>function() {
-        //  isset($model->fec_nac) ? $model->fec_nac : '';
-        //}
-      ],
-      [
-        'attribute'=>'curp',
-        'label'=>'CURP',
-      ],
-      [
-        'attribute'=>'rfc',
-        'label'=>'RFC',
-      ],
-    ],
-  ],
-  [
-    'columns'=>[
-      [
-        'attribute'=>'edo_civil',
-        'label'=>'ESTADO CIVIL',
-      ],
-      [
-        'attribute'=>'sexo',
-        'label'=>'GENERO',
-      ],
-    ],
-  ],
-  [
-    'columns'=>[
-      [
-        'attribute'=>'tel',
-        'label'=>'TELEFONO',
-      ],
-      [
-        'attribute'=>'email',
-        'label'=>'CORREO-E',
-      ],
-    ],
-  ],
-  [
-    'group'=>true,
-    'rowOptions'=>['class'=>'table-info'],
-    'label'=>'DOMICILIO',
-  ],
-  [
-    'columns'=> [
-      [
-      'attribute'=>'calle_no',
-      'label'=>'CALLE Y NÚMERO',
-      ],
-      [
-        'attribue'=>'colonia',
-        'label'=>'COLONIA:',
-      ]
-    ],
     'columns' => [
       [
-        'attribute'=>'ciudad',
-        'label'=>'CIUDAD',
+        'attribute' => 'ncorto',
+        'label' => 'NOM. CORTO:',
+        'valueColOptions' => ['style' => 'width: 25%'],
+        'labelColOptions' => ['style' => 'width: 20%'],
       ],
       [
-        'attribute'=>'estado',
-        'label'=>'ESTADO',
+        'attribute' => 'apodo',
+        'label'=>'SOBRENOMBRE:',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'curp',
+        'label' => 'CURP:',
+        'valueColOptions' => ['style' => 'width: 25%'],
+        'labelColOptions' => ['style' => 'width: 20%'],
+      ],
+      [
+        'attribute' => 'rfc',
+        'label'=>'RFC:',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'fec_nac',
+        'label' => 'FEC. NAC.:',
+        'format' => 'date',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'sexo',
+        'label' => 'GENERO:',
+      ],
+      [
+        'attribute' => 'edo_civil',
+        'label' => 'EDO. CIVIL:',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'tel',
+        'label' => 'TELEFONO:',
+      ],
+      [
+        'attribute' => 'email',
+        'label' => 'CORREO-E:',
+      ],
+    ]
+  ],
+  [
+    'group' => true,
+    'label' => 'DATOS DEL DOMICILIO',
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'calle_no',
+        'label' => 'CALLE Y NUM.',
+      ],
+      [
+        'attribute' => 'colonia',
+        'label' => 'COLONIA:',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'ciudad',
+        'label' => 'CIUDAD:',
+      ],
+      [
+        'attribute' => 'estado',
+        'label' => 'ESTADO:',
       ],
     ],
   ],
   [
-    'columns'=>[
+    'columns' => [
       [
-        'attribute'=>'pais',
-        'label'=>'PAIS',
+        'attribute' => 'pais',
+        'label' => 'PAIS:',
       ],
       [
-        'attribute'=>'nacionalidad',
-        'label'=>'NACIONALIDAD',
-      ],
-    ],
+        'attribute' => 'nacionalidad',
+        'label' => 'NACIONALIDAD:',
+      ]
+    ]
   ],
   [
     'group'=>true,
-    'rowOptions'=>['class'=>'table-info'],
-    'label'=>'DATOS DE TRABAJO',
+    'label'=>'DATOS LABORALES',
   ],
   [
-    'columns'=> [
+    'columns' => [
       [
-        'attribute'=>'fec_ingreso',
-        'label'=>'FEC. INGRESO',
+        'attribute' => 'fec_ingreso',
+        'label' => 'FEC. DE INGRESO:',
+        'format' => 'date',
       ],
       [
-        'attribute'=>'fec_planta',
-        'label'=>'FEC. PLANTA',
+        'attribute' => 'fec_planta',
+        'label' => 'FEC. PLANTA:',
+        'format' => 'date',
+      ]
+    ],
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'fec_depto',
+        'label' => 'FEC. EN DEPTO.:',
+        'format' => 'date',
       ],
       [
-        'attribute'=>'fec_depto',
-        'label'=>'EN DEPTO.',
+        'attribute' => 'fec_cat',
+        'label' => 'FEC. EN CATEGORIA:',
+        'format' => 'date',
+      ]
+    ]
+  ],
+  [
+    'columns' => [
+      [
+        'attribute' => 'reg_cont',
+        'label' => 'REG. CONTRACTUAL:',
       ],
       [
-        'attribute'=>'fec_cat',
-        'label'=>'FEC. CATEGORIA',
+        'attribute' => 'reg_sind',
+        'label' => 'REG. SINDICAL:',
       ]
     ]
   ]
 ];
+
 
 ?>
 <div class="rh-trab-view">
@@ -185,12 +220,12 @@ $attributes = [
         'mode'=>DetailView::MODE_VIEW,
         'enableEditMode'=>false,
         'hAlign'=>DetailView::ALIGN_LEFT,
+        'vAlign'=>DetailView::ALIGN_MIDDLE,
         'panel'=>[
-//          'heading'=>'FICHA: ' . '<strong>' . $model->clave . '</strong>',
-          'heading'=>'<strong>' . $model->nlargo . '</strong>',
-          // . ($model->activo==1) ? '<span class="badge badge-success">ACTIVO</span>' : '<span class="badge badge-danger">INACTIVO</span></span>',
-          //'type'=>DetailView::TYPE_INFO,
-          'type'=>$model->activo?DetailView::TYPE_INFO:DetailView::TYPE_DANGER,
+          'type' => ($model->activo==1) ? DetailView::TYPE_INFO : DetailView::TYPE_DANGER,
+          'heading' => $heading,
+          'footer'=>'',
+          //'<strong>' . 'Trabajador ' . $model->status . '</strong>',
         ],
         'attributes' => $attributes,
     ]) ?>

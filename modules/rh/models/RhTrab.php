@@ -142,6 +142,11 @@ class RhTrab extends \yii\db\ActiveRecord
       return $this->nombre . ' ' . $this->ap_pat . ' ' . $this->ap_mat;
     }
 
+    public function getStatus()
+    {
+      return ($this->activo===1) ? 'ACTIVO' : 'INACTIVO';
+    }
+
     public function getDisplayClave()
     {
       return 'F-' . $this->clave;
