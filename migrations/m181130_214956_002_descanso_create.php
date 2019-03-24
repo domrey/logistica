@@ -61,12 +61,13 @@ class m181130_214956_002_descanso_create extends MyDbMigration
     public function _safeUp_mysql()
     {
         $this->createTable ($this->tableName, [
-            'clave'     => $this->char(2)->notNull(),
-            'descr'     => $this->string(45)->notNull(),
-            'valor'     => $this->integer()->unsigned()->notNull(),
-            'abrevn'    => $this->string(10),
+            'clave'     => $this->char(2)->notNull()->comment('CLAVE EN LETRA DEL DIA DE DESCANSO'),
+            'descr'     => $this->string(45)->notNull()->comment('NOMBRE DEL DIA DE LA SEMANA'),
+            'valor'     => $this->integer()->unsigned()->notNull()->comment('VALOR NUMERICO DEL REGISTRO') ,
+            'abrevn'    => $this->string(10)->comment('ABREVIACION NUMERICA EN TEXTO DEL DIA DE DESCANSO'),
         ]);
-        $this->addPrimaryKey('PK-clave', $this->tableName, 'clave');
+        $this->addCommentOnTable($this->tableName, 'TABLA DE DIAS DE DESCANSO');
+        $this->addPrimaryKey('PK_DESCANSO_CLAVE', $this->tableName, 'clave');
         $this->insertRows();
     }
 
@@ -77,7 +78,7 @@ class m181130_214956_002_descanso_create extends MyDbMigration
 
     public function _safeDown_mysql()
     {
-        $this->dropPrimaryKey('PK-clave', $this->tableName);
+        $this->dropPrimaryKey('PK_DESCANSO_CLAVE', $this->tableName);
         $this->dropTable($this->tableName);
     }
 

@@ -75,7 +75,8 @@ class m181130_204256_001_jornada_create extends MyDbMigration
 
         // Crear las llaves foráneas e indices
         // 'clave' es la llave primaria de la tabla - no se auto-incrementa
-        $this->addPrimaryKey('PK-clave', $this->tableName, 'clave');
+        $this->addCommentOnTable($this->tableName, 'TABLA DE JORNADAS DE TRABAJO');
+        $this->addPrimaryKey('PK_JORNADA_CLAVE', $this->tableName, 'clave');
         $this->insertRows();
     }
 
@@ -87,7 +88,7 @@ class m181130_204256_001_jornada_create extends MyDbMigration
     public function _safeDown_mysql()
     {
         //Eliminar claves e indices
-        $this->dropPrimaryKey('PK-clave', $this->tableName);
+        $this->dropPrimaryKey('PK_JORNADA_CLAVE', $this->tableName);
         $this->dropTable($this->tableName);
     }
 

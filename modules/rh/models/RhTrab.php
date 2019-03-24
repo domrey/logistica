@@ -147,6 +147,11 @@ class RhTrab extends \yii\db\ActiveRecord
       return ($this->activo===1) ? 'ACTIVO' : 'INACTIVO';
     }
 
+    public function getFicha()
+    {
+        return sprintf("%07d", $this->clave);
+    }
+
     public function getDisplayClave()
     {
       return 'F-' . $this->clave;

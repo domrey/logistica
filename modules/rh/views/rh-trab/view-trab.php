@@ -14,19 +14,23 @@ $this->params['breadcrumbs'][] = ['label' => 'Fichero', 'url' => ['/rh/rh-trab/l
 $this->params['breadcrumbs'][] = ucwords(strtolower($this->title));
 
 $badge_status = '<span class="badge badge-' . (($model->activo) ? 'sucess">' : 'danger">') . $model->status . '</span>';
-$heading = $badge_status . '  <i class="glyphicon glyphicon-user"></i> <strong>' . $model->nlargo . '</strong>';
+$heading = '<i class="glyphicon glyphicon-user"></i> <strong>' . $model->nlargo . '</strong>&nbsp;&nbsp;&nbsp;&nbsp;';
+// . $badge_status;
 
 $attributes = [
   [
     'columns' => [
       [
-        'attribute' => 'clave',
-        'label' => 'FICHA:',
+        'attribute' => 'ficha',
+        'label' => 'Ficha:',
+        'format' => 'raw',
+        'value' => '<kbd><strong>' . $model->ficha . '</strong></kbd>',
       ],
       [
         'attribute' => 'status',
         'format' => 'raw',
-        'label' => 'STATUS:',
+        'label' => 'Status:',
+        'value' => $badge_status,
       ],
     ],
   ],
@@ -34,27 +38,27 @@ $attributes = [
     'group' => true,
     'format' => 'raw',
     'label' => 'DATOS PERSONALES',
-    'rowOptions' => ['class' => 'table-info'],
+    'rowOptions' => ['class' => 'info'],
   ],
   [
     'columns' => [
       [
         'attribute' => 'nombre',
-        'label' => 'NOMBRE:',
-        'labelColOptions' => ['style' => 'width: 10%'],
-        'valueColOptions' => ['style' => 'width: 20%'],
+        'label' => 'Nombre:',
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
+        'valueColOptions' => ['style' => 'width: 20%; font-style: italic;'],
       ],
       [
         'attribute' => 'ap_pat',
-        'label' => 'AP. PATERNO:',
-        'labelColOptions' => ['style' => 'width: 10%'],
-        'valueColOptions' => ['style' => 'width: 25%'],
+        'label' => 'Ap. Paterno:',
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
       ],
       [
         'attribute' => 'ap_mat',
-        'label' => 'AP. MATERNO',
-        'labelColOptions' => ['style' => 'width: 10%'],
-        'valueColOptions' => ['style' => 'width: 25%'],
+        'label' => 'Ap. Materno',
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
       ],
     ]
   ],
@@ -62,13 +66,15 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'ncorto',
-        'label' => 'NOM. CORTO:',
-        'valueColOptions' => ['style' => 'width: 25%'],
-        'labelColOptions' => ['style' => 'width: 20%'],
+        'label' => 'Nom. Corto:',
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
       ],
       [
         'attribute' => 'apodo',
-        'label'=>'SOBRENOMBRE:',
+        'label'=>'Sobrenombre:',
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
       ]
     ]
   ],
@@ -76,13 +82,15 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'curp',
-        'label' => 'CURP:',
-        'valueColOptions' => ['style' => 'width: 25%'],
-        'labelColOptions' => ['style' => 'width: 20%'],
+        'label' => 'curp:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'rfc',
-        'label'=>'RFC:',
+        'label'=>'rfc:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ],
@@ -90,8 +98,10 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'fec_nac',
-        'label' => 'FEC. NAC.:',
+        'label' => 'Fec. Nac.:',
         'format' => 'date',
+        'valueColOptions' => ['style' => 'width: 80%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 10%; font-variant: small-caps;'],
       ]
     ]
   ],
@@ -99,11 +109,15 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'sexo',
-        'label' => 'GENERO:',
+        'label' => 'Género:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'edo_civil',
-        'label' => 'EDO. CIVIL:',
+        'label' => 'Edo. Civil:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ],
@@ -111,27 +125,36 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'tel',
-        'label' => 'TELEFONO:',
+        'label' => 'Teléfono:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'email',
-        'label' => 'CORREO-E:',
+        'label' => 'Correo-e:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
     ]
   ],
   [
     'group' => true,
     'label' => 'DATOS DEL DOMICILIO',
+    'rowOptions' => ['class' => 'info'],
   ],
   [
     'columns' => [
       [
         'attribute' => 'calle_no',
-        'label' => 'CALLE Y NUM.',
+        'label' => 'Calle Y Núm.',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'colonia',
-        'label' => 'COLONIA:',
+        'label' => 'Colonia:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ],
@@ -139,11 +162,15 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'ciudad',
-        'label' => 'CIUDAD:',
+        'label' => 'Ciudad:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'estado',
-        'label' => 'ESTADO:',
+        'label' => 'Entidad:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
     ],
   ],
@@ -151,29 +178,38 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'pais',
-        'label' => 'PAIS:',
+        'label' => 'País:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'nacionalidad',
-        'label' => 'NACIONALIDAD:',
+        'label' => 'Nacionalidad:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ],
   [
     'group'=>true,
     'label'=>'DATOS LABORALES',
+    'rowOptions' => ['class' => 'info'],
   ],
   [
     'columns' => [
       [
         'attribute' => 'fec_ingreso',
-        'label' => 'FEC. DE INGRESO:',
+        'label' => 'Fec. De Ingreso:',
         'format' => 'date',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'fec_planta',
-        'label' => 'FEC. PLANTA:',
+        'label' => 'Fec. Planta:',
         'format' => 'date',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ],
   ],
@@ -181,13 +217,17 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'fec_depto',
-        'label' => 'FEC. EN DEPTO.:',
+        'label' => 'Fec. En Depto.:',
         'format' => 'date',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'fec_cat',
-        'label' => 'FEC. EN CATEGORIA:',
+        'label' => 'Fec. En Categoría:',
         'format' => 'date',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ],
@@ -195,11 +235,15 @@ $attributes = [
     'columns' => [
       [
         'attribute' => 'reg_cont',
-        'label' => 'REG. CONTRACTUAL:',
+        'label' => 'Reg. Contractual:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ],
       [
         'attribute' => 'reg_sind',
-        'label' => 'REG. SINDICAL:',
+        'label' => 'Reg. Sindical:',
+        'valueColOptions' => ['style' => 'width: 25%; font-style: italic;'],
+        'labelColOptions' => ['style' => 'width: 20%; font-variant: small-caps;'],
       ]
     ]
   ]
@@ -222,7 +266,7 @@ $attributes = [
         'hAlign'=>DetailView::ALIGN_LEFT,
         'vAlign'=>DetailView::ALIGN_MIDDLE,
         'panel'=>[
-          'type' => ($model->activo==1) ? DetailView::TYPE_INFO : DetailView::TYPE_DANGER,
+          'type' => ($model->activo==1) ? DetailView::TYPE_PRIMARY : DetailView::TYPE_DANGER,
           'heading' => $heading,
           'footer'=>'',
           //'<strong>' . 'Trabajador ' . $model->status . '</strong>',

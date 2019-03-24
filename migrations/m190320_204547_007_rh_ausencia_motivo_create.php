@@ -6,7 +6,7 @@ use app\commands\templates\MyDbMigration;
 
 class m190320_204547_007_rh_ausencia_motivo_create extends MyDbMigration
 {
-   protected $tableName='';
+   protected $tableName='rh_ausencia_motivo';
 /*
     public function up()
     {
@@ -53,7 +53,12 @@ class m190320_204547_007_rh_ausencia_motivo_create extends MyDbMigration
 
     public function _safeUp_mysql()
     {
-
+        $this->createTable($this->tableName, [
+            'clave' =>  $this->string(6)->notNull()->primaryKey(),
+            'descr' => $this->string(40)->notNull(),
+            'orden' => $this->tinyInteger()->null(),
+        ]);
+        $this->insertRows();
     }
 
     public function _safeDown_sqlite()
@@ -64,5 +69,10 @@ class m190320_204547_007_rh_ausencia_motivo_create extends MyDbMigration
     public function _safeDown_mysql()
     {
 
+    }
+
+    public function insertRows()
+    {
+        
     }
 }

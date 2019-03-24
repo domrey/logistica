@@ -76,15 +76,16 @@ class m181218_161059_004_puesto_create extends MyDbMigration
             'clave_stps'    => $this->integer()->unsigned()->comment('CLAVE DEL PUESTO SEGUN LA STPS'),
             'activo'        => $this->tinyInteger()->notNull()->defaultValue(1)->comment('REGISTRO ACTIVO'),
             'nivel'         => $this->smallInteger()->notNull()->comment('NIVEL DEL PUESTO'),
-            'familia'       => $this->smallInteger()->notNull()->comment('CLAVE DE FAMILIA DEL PUESTO'),
-            'labores'       => $this->smallInteger()->notNull()->comment('CLAVE LABORAL DEL PUESTO'),
+            'familia'       => $this->smallInteger()->notNull()->comment('CLAVE DE LA ESPECIALIDAD  DEL PUESTO'),
+            'labores'       => $this->smallInteger()->notNull()->comment('CLAVE DEL GRUPO DE ACTIVIDAD DEL PUESTO'),
             'regimen'       => $this->char(1)->notNull()->comment('REGIMEN CONTRACTUAL DEL PUESTO'),
             'clasif'        => $this->string(8)->notNull()->comment('CLASIFICACION DEL PUESTO'),
             'id_rev'        => $this->smallInteger()->unsigned()->notNull()->comment('ID DE LA REVISION CONTRACTUAL'),
             'id_reg_cont'   => $this->smallInteger()->unsigned()->notNull()->comment('ID DEL REGIMEN CONTRACTUAL DEL PUESTO'),
         ]);
-        $this->addPrimaryKey('PK_clave', $this->tableName, 'clave');
-	$this->createIndex('IDX_descr_puesto', $this->tableName, 'descr ASC');
+        $this->addCommentOnTable($this->tableName, 'TABLA DE CATEGORIAS (PUESTOS DE TRABAJO)');
+        $this->addPrimaryKey('PK_CLAVE_PUESTO', $this->tableName, 'clave');
+	$this->createIndex('IDX_DESCR_PUESTO', $this->tableName, 'descr', 'ASC');
         $this->insertRows();
     }
 
@@ -95,8 +96,8 @@ class m181218_161059_004_puesto_create extends MyDbMigration
 
     public function _safeDown_mysql()
     {
-        $this->dropPrimaryKey('PK_clave', $this->tableName);
-	$this->dropIndex('IDX_descr', $this->tableName);
+        $this->dropPrimaryKey('PK_CLAVE_PUESTO', $this->tableName);
+	    $this->dropIndex('IDX_DESCR_PUESTO', $this->tableName);
         $this->dropTable($this->tableName);
     }
 
