@@ -77,7 +77,8 @@ class m181218_201510_005_plaza_create extends MyDbMigration
     public function _safeUp_mysql()
     {
         $this->createTable($this->tableName, [
-            'id'            => $this->primaryKey()->comment('ID DEL REGISTRO'),
+            //'id'            => $this->primaryKey()->comment('ID DEL REGISTRO'),
+            'id'            => $this->integer()->unsigned()->notNull()->comment('ID DEL REGISTRO'),
             'clave'         => $this->string(30)->notNull()->comment('CLAVE DE LA PLAZA'),
             'descr'         => $this->string(65)->comment('DESCRIPCIÓN DE LA PLAZA'),
             'tipo'          => $this->string(10)->notNull()->defaultValue('TEMPORAL')->comment('TIPO DE TERPORARIDAD'),
@@ -100,6 +101,8 @@ class m181218_201510_005_plaza_create extends MyDbMigration
             'posfin'        => $this->integer()->unsigned()->comment('CLAVE DE LA POSICION FINANCIERA A LA QUE SE CARGA LA PLAZA'),
             'escalafon'     => $this->integer()->unsigned()->comment('VALOR NUMERICO QUE INDICA EL ESCALAFON AL QUE PERTENECE'),
         ]);
+        $this->alterColumn($this->tableName, 'id', 'INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY');
+        //$this->addPrimaryKey('PK_ID_PLAZA', $this->tableName, 'id');
         $this->addCommentOnTable($this->tableName, 'TABLA DE PLAZAS');
         $this->createIndex('IDX_CLAVE_PLAZA', $this->tableName, 'clave');
         $this->createIndex('IDX_CLAVE_DESCANSO', $this->tableName, 'clave_descanso');

@@ -6,7 +6,7 @@ use app\commands\templates\MyDbMigration;
 
 class m190320_170809_006_rh_clase_ausencia_create extends MyDbMigration
 {
-   protected $tableName='rh_clase_ausencia';
+   protected $tableName='rh_ausencia_clase';
 /*
     public function up()
     {
@@ -61,12 +61,11 @@ class m190320_170809_006_rh_clase_ausencia_create extends MyDbMigration
     {
         $this->createTable($this->tableName, [
             //'id'    => $this->integer()->unsigned() . 'AUTO_INCREMENT',
-            'clave' => $this->string(3)->notNull()->primaryKey(),
+            'clave' => $this->string(3)->notNull(),
             'descr' => $this->string(40)->notNull(),
         ]);
-        //$this->addPrimaryKey('PK_CLAVE_CLASE_AUSENCIA', $this->tableName, 'clave');
-        //$this->primaryKey('clave');
-        $this->addCommentOnColumn($this->tableName, 'id', 'ID del registro');
+        $this->addPrimaryKey('PK_AUSENCIA_CLASE_CLAVE', $this->tableName, 'clave');
+        //$this->addCommentOnColumn($this->tableName, 'id', 'ID del registro');
         $this->addCommentOnColumn($this->tableName, 'clave', 'Clave de la clase de ausencia');
         $this->addCommentOnColumn($this->tableName, 'descr', 'Descripción de la clase de ausencia');
         $this->addCommentOnTable($this->tableName, 'Tabla de clases de ausencias');
@@ -80,6 +79,7 @@ class m190320_170809_006_rh_clase_ausencia_create extends MyDbMigration
 
     public function _safeDown_mysql()
     {
+        $this->dropPrimaryKey('PK_AUSENCIA_CLASE_CLAVE', $this->tableName);
         $this->dropTable($this->tableName);
     }
 
